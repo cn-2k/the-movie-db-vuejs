@@ -1,8 +1,8 @@
 <template>
   <div class="divide-y divide-slate-100">
     <Nav>
-      <NavItem href="/new" :isActive="true" >Popular Movies</NavItem>
-      <NavItem href="/favs">Favorites</NavItem>
+      <NavItem href="/new" :isActive="true" ><RouterLink to="/">Popular Movies</RouterLink></NavItem>
+      <NavItem href="/favorites"><RouterLink to="/favorites">Favorites</RouterLink></NavItem>
     </Nav>
     <List>
       <ListItem v-for="movie in movies.results" :key="movie.id" :movie="movie" />

@@ -1,16 +1,24 @@
 <template>
- <li>
-    <div class="px-3 py-2 rounded-md text-slate-700 cursor-pointer"
-    :class="[isActive ? 'bg-sky-500 text-white font-bold' : 'bg-[#F8FAFC]']"
-    >
-    <slot></slot>
-    </div>
+
+  <li>
+    <router-link :to="to"
+      ><button
+        @click="nav.makeAtive(props.to)"
+        class="px-3 py-2 rounded-md text-slate-700 cursor-pointer"
+        :class="[nav.isActive === props.to ? 'bg-sky-500 text-white font-bold' : 'bg-[#F7F7F7] hover:bg-[#ebedef] transition-colors']"
+      >
+        <slot></slot>
+      </button>
+    </router-link>
   </li>
 </template>
 
 <script setup lang="ts">
-defineProps<{
-  href: string;
-  isActive?: Boolean;
+import { useNavStore } from '../store/nav'
+
+const nav = useNavStore()
+
+const props = defineProps<{
+  to: string;
 }>();
 </script>

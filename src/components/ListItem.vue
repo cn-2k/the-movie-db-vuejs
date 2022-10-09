@@ -1,6 +1,6 @@
 <template>
   <article class="p-4 sm:p-6 lg:p-4 xl:p-6 space-x-4 items-start sm:space-x-6 lg:space-x-4 xl:space-x-6 flex">
-        <img :src="'https://image.tmdb.org/t/p/w400' + movie.poster_path" loading="lazy" decoding="async" alt="" width="60" height="88" class="flex-none rounded-md bg-slate-100" />
+        <img :src="'https://image.tmdb.org/t/p/w400' + movie.poster_path" loading="lazy" decoding="async" alt="" width="60" height="88" class="flex-none rounded-md bg-slate-100 shadow-lg shadow-zinc-400" />
         <div class="min-w-0 relative flex-auto">
             <h2 class="font-semibold text-slate-900 truncate sm:pr-20 dark:text-slate-100">{{ movie.title }}</h2>
             <dl class="mt-2 flex flex-wrap text-sm leading-6 font-medium">

@@ -8,15 +8,15 @@ import Movies from "@/components/Movies.vue";
 import services from "@/services";
 
 onMounted(() => {
-getMovies();
+  getMovies();
 });
 
 const popularMovies = ref<any>([]);
 
 const getMovies = async () => {
-const { data } = await services.movies.getPopularMovie();
-popularMovies.value = data;
-console.log(popularMovies.value.results);
+  const { data } = await services.movies.getPopularMovie();
+  popularMovies.value = data.results;
+  console.log(popularMovies.value.results);
 };
 </script>
 

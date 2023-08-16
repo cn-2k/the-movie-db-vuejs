@@ -1,23 +1,17 @@
 <template>
-  <Movies :movies="popularMovies" />
+  <Movies :movies="movies.popularMovies" />
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted } from "vue";
+import { useFavorites } from "@/store/favorites";
 import Movies from "@/components/Movies.vue";
-import services from "@/services";
+
+const movies = useFavorites();
 
 onMounted(() => {
-  getMovies();
+  movies.getMovies();
 });
-
-const popularMovies = ref<any>([]);
-
-const getMovies = async () => {
-  const { data } = await services.movies.getPopularMovie();
-  popularMovies.value = data.results;
-  console.log(popularMovies.value.results);
-};
 </script>
 
 <style></style>

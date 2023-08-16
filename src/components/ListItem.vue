@@ -10,7 +10,7 @@
       class="flex-none rounded-md bg-slate-100 shadow-lg shadow-zinc-400"
     />
     <div class="min-w-0 relative flex-auto">
-      <h2 class="font-semibold text-slate-900 truncate sm:pr-20">
+      <h2 class="font-semibold text-slate-700 truncate sm:pr-20">
         {{ movie.title }}
       </h2>
       <dl class="mt-2 flex flex-wrap text-sm leading-6 font-medium">
@@ -37,8 +37,10 @@
           <dt class="sr-only">Year</dt>
           <dd>{{ dayjs(movie.release_date).format("YYYY") }}</dd>
         </div>
+        <!-- TODO: add animation heart like twitter lottie file  -->
         <div class="flex flex-col justify-center">
           <dd class="flex items-center">
+            <!-- CIRCULO  -->
             <svg
               width="2"
               height="2"
@@ -48,29 +50,32 @@
             >
               <circle cx="1" cy="1" r="1"></circle>
             </svg>
+            <!-- FAVORITO  -->
             <svg
               width="18"
               height="18"
-              viewBox="0 0 256 256"
-              class="cursor-pointer text-red-400 hover:text-red-500"
-              @click="addFavorite(movie)"
-              v-if="!isFavorite"
+              viewBox="0 0 24 24"
+              @click="toggleFavoriteMovie(movie.id)"
+              class="cursor-pointer fill-transparent stroke-2 stroke-red-500"
+              :class="{ 'fill-red-500': isFavorite }"
+              v-if="useRoute().path === '/'"
             >
               <path
-                fill="currentColor"
-                d="M128 226.2a20.1 20.1 0 0 1-14.2-5.8l-83.1-83.1a64.1 64.1 0 0 1 2.5-92.9a62.1 62.1 0 0 1 46-15.6a68.8 68.8 0 0 1 44.1 20l4.7 4.7l6.7-6.8a64.1 64.1 0 0 1 92.9 2.5a62.1 62.1 0 0 1 15.6 46a68.8 68.8 0 0 1-20 44.1l-81.1 81.1a19.8 19.8 0 0 1-14.1 5.8Zm5.6-14.3ZM75 52.7a38.1 38.1 0 0 0-25.7 9.5a40 40 0 0 0-1.6 58.1l80.3 80.3l78.2-78.2c15.9-16 17.5-41.6 3.6-57.1a40 40 0 0 0-58.1-1.6l-15.2 15.2a12 12 0 0 1-17 0l-13.2-13.1A44.2 44.2 0 0 0 75 52.7Z"
+                d="M12 20.325q-.35 0-.713-.125t-.637-.4l-1.725-1.575q-2.65-2.425-4.788-4.813T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.538t2.5-.562q2.35 0 3.925 1.575T22 8.15q0 2.875-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125Z"
               />
             </svg>
+            <!-- DESFAVORITO  -->
             <svg
-              v-if="isFavorite"
               width="18"
               height="18"
               viewBox="0 0 24 24"
               class="cursor-pointer text-red-500"
+              @click="favorites.removeFavoriteMovie(movie.id)"
+              v-if="isFavorite && useRoute().path === '/favorites'"
             >
               <path
                 fill="currentColor"
-                d="M12 20.325q-.35 0-.713-.125t-.637-.4l-1.725-1.575q-2.65-2.425-4.788-4.813T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.538t2.5-.562q2.35 0 3.925 1.575T22 8.15q0 2.875-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125Z"
+                d="M15 14v-2h8v2h-8Zm-4 7l-3.175-2.85q-1.8-1.625-3.088-2.9t-2.125-2.4q-.837-1.125-1.225-2.175T1 8.475q0-2.35 1.575-3.913T6.5 3q1.3 0 2.475.537T11 5.075q.85-1 2.025-1.538T15.5 3q2.125 0 3.563 1.288T20.85 7.3q-.45-.175-.9-.262t-.875-.088q-2.525 0-4.3 1.763T13 13q0 1.3.525 2.463T15 17.45q-.475.425-1.238 1.088T12.45 19.7L11 21Z"
               />
             </svg>
           </dd>
@@ -94,19 +99,24 @@
 <script setup lang="ts">
 import dayjs from "dayjs";
 import { useFavorites } from "@/store/favorites";
+import { useRoute } from "vue-router";
 import { ref } from "vue";
 
-const props = defineProps<{
+defineProps<{
   movie: any;
+  isFavorite: boolean;
 }>();
 
-const favorites: any = useFavorites().favorites;
+const favorites = useFavorites();
+const selectedFavorite = ref<boolean>(false);
 
-const isFavorite = ref(false);
+const toggleFavoriteMovie = (movie_id: number) => {
+  selectedFavorite.value = !selectedFavorite.value;
 
-const addFavorite = (movie: any) => {
-  isFavorite.value = true;
-  console.log("add", movie);
-  favorites.push(movie);
+  if (selectedFavorite.value) {
+    favorites.addFavoriteMovie(movie_id);
+  } else {
+    favorites.removeFavoriteMovie(movie_id);
+  }
 };
 </script>

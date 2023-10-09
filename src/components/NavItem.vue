@@ -1,25 +1,21 @@
 <template>
-  <router-link :to="to"
-    ><button
-      @click="nav.makeAtive(props.to)"
-      class="px-3 py-2 rounded-md text-slate-700 cursor-pointer font-bold tracking-wide shadow-sm"
-      :class="[
-        nav.isActive === props.to
-          ? 'bg-sky-500 text-white'
-          : 'bg-[#f2f2f2] hover:bg-[#ebedef]',
-      ]"
-    >
+  <router-link :to="to" v-slot="{ isExactActive }">
+    <div class="px-3 py-2 rounded-md text-slate-700 cursor-pointer font-bold tracking-wide shadow-sm bg-[#f2f2f2] hover:bg-[#ebedef]"
+      :class="{ 'router-link-exact-active': isExactActive }">
       <slot></slot>
       <slot name="favorites"></slot>
-    </button>
+    </div>
   </router-link>
 </template>
 
 <script setup lang="ts">
-import { useNavStore } from "../store/nav";
-const nav = useNavStore();
-
-const props = defineProps<{
+defineProps<{
   to: string;
 }>();
 </script>
+
+<style scoped lang="postcss">
+.router-link-exact-active {
+  @apply bg-sky-500 text-white rounded-md
+}
+</style>

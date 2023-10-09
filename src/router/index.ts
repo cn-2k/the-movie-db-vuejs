@@ -20,6 +20,11 @@ export const constantRoutes = [
           name: "favorites",
           component: () => import("../views/Favorites.vue"),
         },
+        {
+          path: "/movie/:id",
+          name: "movie",
+          component: () => import("../views/MovieDetails.vue"),
+        },
       ],
   },
 ]

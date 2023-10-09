@@ -17,4 +17,12 @@ export default (httpClient: AxiosInstance) => ({
       data: response.data,
     };
   },
+
+  getMovieDetails: async (movie_id: any) => {
+    const response = await httpClient.get(`/3/movie/${movie_id}`);
+
+    return {
+      data: response.data,
+    };
+  }
 });

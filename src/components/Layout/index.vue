@@ -6,7 +6,7 @@
       <!-- MOVIE CONTAINER  -->
       <div class="w-full lg:w-[35rem] mb-6 lg:mb-0">
         <div
-          class="overflow-auto scrollbar-hide bg-white h-[30rem] rounded-xl ring-1"
+          class="overflow-auto scrollbar-hide bg-white h-[40rem] rounded-xl"
         >
           <RouterView />
         </div>

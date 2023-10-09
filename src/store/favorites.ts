@@ -1,18 +1,12 @@
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import services from "@/services";
+import { useStorage } from '@vueuse/core'
+
 
 export const useFavorites = defineStore("favorites", () => {
-  const favorites = ref<any>([]);
-  const popularMovies = ref<any>([]);
-
-  const totalFavorites = computed(() => {
-    return favorites.value.length
-  })
-
-  const isFavorite = (movie_id: number) => {
-    return favorites.value.some((x: any) => x.id === movie_id)
-  }
+  const popularMovies = ref<any>(useStorage('popularMovies', []))
+  const favorites = ref<any>(useStorage('favorites', []))
 
   const getMovies = async () => {
     const { data } = await services.movies.getPopularMovie();
@@ -28,6 +22,14 @@ export const useFavorites = defineStore("favorites", () => {
   const removeFavoriteMovie = (movie_id: number) => {
     favorites.value = favorites.value.filter((x: any) => x.id !== movie_id)
   }
+
+  const totalFavorites = computed(() => {
+    return favorites.value.length
+  })
+
+  const isFavorite = computed(() => (movie_id: number) => {
+    return favorites.value.some((x: any) => x.id === movie_id)
+  })
 
   return { favorites, totalFavorites, addFavoriteMovie, removeFavoriteMovie, isFavorite, getMovies, popularMovies };
 });

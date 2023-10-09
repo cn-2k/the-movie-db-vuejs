@@ -1,7 +1,8 @@
 <template>
   <article class="flex p-5 space-x-4 items-start">
+    <router-link :to="`/movie/${movie.id}`">
     <img
-      :src="`https://image.tmdb.org/t/p/w400${movie.poster_path}`"
+      :src="`https://image.tmdb.org/t/p/w200${movie.poster_path}`"
       loading="lazy"
       decoding="async"
       alt=""
@@ -9,6 +10,7 @@
       height="88"
       class="flex-none rounded-md bg-slate-100 shadow-lg shadow-zinc-400"
     />
+  </router-link>
     <div class="min-w-0 relative flex-auto">
       <h2 class="font-semibold text-slate-700 truncate sm:pr-20">
         {{ movie.title }}
@@ -80,17 +82,6 @@
             </svg>
           </dd>
         </div>
-        <!-- GENRE LIST  -->
-        <!-- <div class="flex w-full mt-4 font-normal space-x-1">
-          <div
-            v-for="item in state.movieGenres"
-            :key="item.id"
-            href="#"
-            class="w-fit cursor-pointer hover:bg-slate-200 text-zinc-600 text-xs bg-slate-100 px-2 py-1 rounded-full"
-          >
-            {{ item.name }}
-          </div>
-        </div> -->
       </dl>
     </div>
   </article>
@@ -102,7 +93,7 @@ import { useFavorites } from "@/store/favorites";
 import { useRoute } from "vue-router";
 import { ref } from "vue";
 
-defineProps<{
+const props = defineProps<{
   movie: any;
   isFavorite: boolean;
 }>();
@@ -114,7 +105,13 @@ const toggleFavoriteMovie = (movie_id: number) => {
   selectedFavorite.value = !selectedFavorite.value;
 
   if (selectedFavorite.value) {
+    if (props.isFavorite) {
+      favorites.removeFavoriteMovie(movie_id);
+        selectedFavorite.value = false
+      return;
+    }
     favorites.addFavoriteMovie(movie_id);
+    
   } else {
     favorites.removeFavoriteMovie(movie_id);
   }

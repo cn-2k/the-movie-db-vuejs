@@ -7,6 +7,7 @@ import { useStorage } from '@vueuse/core'
 export const useFavorites = defineStore("favorites", () => {
   const popularMovies = ref<any>(useStorage('popularMovies', []))
   const favorites = ref<any>(useStorage('favorites', []))
+  const searchMovieQuery = ref<string>("")
 
   const getMovies = async () => {
     const { data } = await services.movies.getPopularMovie();
@@ -31,5 +32,5 @@ export const useFavorites = defineStore("favorites", () => {
     return favorites.value.some((x: any) => x.id === movie_id)
   })
 
-  return { favorites, totalFavorites, addFavoriteMovie, removeFavoriteMovie, isFavorite, getMovies, popularMovies };
+  return { favorites, totalFavorites, addFavoriteMovie, removeFavoriteMovie, isFavorite, getMovies, popularMovies, searchMovieQuery };
 });

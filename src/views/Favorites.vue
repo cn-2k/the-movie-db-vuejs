@@ -1,8 +1,9 @@
 <template>
+<main>
   <Movies :movies="favoriteMovies" />
   <div v-if="!favoriteMovies.length" class="mx-10 mt-4">
     <div
-      class="flex items-center p-4 mb-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50"
+      class="flex items-center p-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50"
       role="alert"
     >
       <svg
@@ -19,6 +20,7 @@
       <div>No favorite movie has been selected!</div>
     </div>
   </div>
+</main>
 </template>
 
 <script setup lang="ts">

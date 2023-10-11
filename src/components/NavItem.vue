@@ -1,7 +1,9 @@
 <template>
   <router-link :to="to" v-slot="{ isExactActive }">
-    <div class="px-3 py-2 rounded-md text-slate-700 cursor-pointer font-bold tracking-wide shadow-sm bg-[#f2f2f2] hover:bg-[#ebedef]"
-      :class="{ 'router-link-exact-active': isExactActive }">
+    <div
+      class="px-3 py-2 rounded-md text-slate-700 cursor-pointer font-bold tracking-wide shadow-sm bg-[#f2f2f2] hover:bg-[#ebedef]"
+      :class="{ 'router-link-exact-active': isExactActive }"
+    >
       <slot></slot>
       <slot name="favorites"></slot>
     </div>
@@ -10,12 +12,13 @@
 
 <script setup lang="ts">
 defineProps<{
-  to: string;
+  to?: any;
 }>();
 </script>
 
 <style scoped lang="postcss">
 .router-link-exact-active {
-  @apply bg-sky-500 text-white rounded-md
+  @apply bg-sky-500 text-white rounded-md;
 }
 </style>
+

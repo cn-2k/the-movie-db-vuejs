@@ -1,41 +1,55 @@
 <template>
   <div class="divide-y divide-slate-100">
-    <Nav>
-      <NavItem to="/">Popular Movies</NavItem>
-      <NavItem to="/favorites">
-        <template #favorites>
-          Favorites
-          <span
-            v-if="favorites.favorites"
-            class="absolute top-3 text-white bg-red-500 border border-white rounded-full px-1 ml-1 font-bold align-middle text-xs"
-          >
-            {{ favorites.totalFavorites }}
-          </span>
-        </template>
-      </NavItem>
-    </Nav>
-
     <List>
       <ListItem
-        v-for="movie in movies"
+        v-for="movie in filteredPopularMovies"
         :key="movie.id"
         :movie="movie"
         :is-favorite="favorites.isFavorite(movie.id)"
       />
+      <div
+        v-if="!filteredPopularMovies.length && favorites.searchMovieQuery"
+        class="mx-10 mt-4"
+      >
+        <div
+          class="flex items-center p-4 mb-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50"
+          role="alert"
+        >
+          <svg
+            class="flex-shrink-0 inline w-4 h-4 mr-3"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+            />
+          </svg>
+          <div>No movies were found!</div>
+        </div>
+      </div>
     </List>
   </div>
 </template>
 
 <script setup lang="ts">
-import Nav from "./Nav.vue";
-import NavItem from "./NavItem.vue";
+import { computed } from "vue";
 import List from "./List.vue";
 import ListItem from "./ListItem.vue";
 import { useFavorites } from "../store/favorites";
+import type { MovieInterface } from "@/types/index";
 
-defineProps<{
-  movies?: any;
+const props = defineProps<{
+  movies: MovieInterface[];
 }>();
 
 const favorites = useFavorites();
+
+const filteredPopularMovies = computed(() => {
+  const filter = favorites.searchMovieQuery.toLowerCase();
+  return props.movies.filter((movie: MovieInterface) =>
+    movie.title.toLowerCase().includes(filter)
+  );
+});
 </script>

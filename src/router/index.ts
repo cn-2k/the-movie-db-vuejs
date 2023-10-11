@@ -22,7 +22,7 @@ export const constantRoutes = [
         },
         {
           path: "/movie/:id",
-          name: "movie",
+          name: "movieDetail",
           component: () => import("../views/MovieDetails.vue"),
         },
       ],

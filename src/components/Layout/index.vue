@@ -20,7 +20,7 @@
             <div class="flex-1">
               <div class="flex flex-row w-full ml-2 gap-3">
                 <input type="text" v-model="favorites.searchMovieQuery" id="first_name"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg block w-full p-2 ml-4 focus:outline-none"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-md block w-full p-2 ml-4 focus:outline-none"
                   placeholder="Search movie..." />
                 <div v-if="$route.path === '/'" @click="syncMovies()" title="Sync popular movies"
                   class="flex justify-end my-auto px-3 py-2 rounded-md text-slate-700 cursor-pointer font-bold tracking-wide shadow-sm bg-[#f2f2f2] hover:bg-[#ebedef]">

@@ -1,8 +1,16 @@
 import type { AxiosInstance } from "axios";
 
+const defaultPagination = {
+  page: 1,
+};
+
 export default (httpClient: AxiosInstance) => ({
-  getPopularMovie: async () => {
-    const response = await httpClient.get("/3/movie/popular");
+  getPopularMovie: async ({ page } = defaultPagination) => {
+    const query = { page };
+
+    const response = await httpClient.get("/3/movie/popular", {
+      params: query,
+    });
 
     return {
       data: response.data,
@@ -24,5 +32,5 @@ export default (httpClient: AxiosInstance) => ({
     return {
       data: response.data,
     };
-  }
+  },
 });

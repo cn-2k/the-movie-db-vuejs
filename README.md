@@ -1,59 +1,75 @@
-# the-movie-db
+<!-- markdownlint-disable MD033 -->
+<!-- markdownlint-disable MD041 -->
+<div align="center">
 
-This template should help get you started developing with Vue 3 in Vite.
+# `The Movie Database - Vue.js`
+</div>
+<br />
+<div align="center">
+  <a>
+    <img alt="Vue.js" src="https://i.imgur.com/ixyunCt.png" />
+  <a/>
+</div>
+<br />
+<div align="center">
+  <a>
+    <img alt="Vue.js" src="https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D" />
+  <a/>
+    <img alt="TypeScript" src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white"/>
+    <img alt="TailwindCSS" src="https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white"/>
+</div>
 
-## Recommended IDE Setup
+## Sobre o Projeto
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+A aplicação consome a API oficial do The Movie DB e exibe em tela uma lista de filmes populares, onde o usuário pode favoritar/desfavoritar filmes e visualizar mais informações sobre algum filme selecionado. Além disso, todos os favoritos são salvos no Local Storage do navegador, fazendo que caso o usuário saia da aplicação ou feche o navegador, não perca seus favoritos.
 
-## Type Support for `.vue` Imports in TS
+Demo: https://the-movie-db-vuejs.vercel.app/#/
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+## Tecnologias
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+<table>
+  <tbody>
+    <tr>
+    <tr>
+      <td style="font-weight: bold">front-end</td>
+      <td>
+        <a href="https://vuejs.org/" target="_blank" rel="noopener noreferrer"><code>Vuejs</code></a> -
+        <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener noreferrer"><code>TypeScript</code></a> -
+        <a href="https://tailwindcss.com/" target="_blank" rel="noopener noreferrer"><code>TailwindCSS</code></a> -
+        <a href="https://axios-http.com/ptbr/" target="_blank" rel="noopener noreferrer"><code>Axios</code></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+## Instalação e Configurações 
 
-## Customize configuration
+### Requisitos
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+Necessário realizar as instalações:
 
-## Project Setup
+- [`Git`](https://git-scm.com/)
+- [`yarn`](https://yarnpkg.com/)
+- [`Node`](https://nodejs.org/)
 
-```sh
-npm install
+### Clonar repositório
+
+```bash
+# Execute o comando git clone para realizar o clone do repositório
+$ git clone https://github.com/cn-2k/the-movie-db-vuejs
+# Entre na pasta do repositório clonado
+$ cd the-movie-db-vuejs
 ```
 
-### Compile and Hot-Reload for Development
+### Comandos importantes
 
-```sh
-npm run dev
+```bash
+# instalar dependências
+$ yarn install
+# iniciar servidor
+$ yarn dev
 ```
 
-### Type-Check, Compile and Minify for Production
+### Variáveis ambiente (.env)
 
-```sh
-npm run build
-```
-
-### Run Headed Component Tests with [Cypress Component Testing](https://on.cypress.io/component)
-
-```sh
-npm run test:unit # or `npm run test:unit:ci` for headless testing
-```
-
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
-
-```sh
-npm run build
-npm run test:e2e # or `npm run test:e2e:ci` for headless testing
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+Na raíz do projeto, altere o nome da variável .env.example para .env e insira sua chave de API do The Movie DB (pode ser obtida no site oficial).

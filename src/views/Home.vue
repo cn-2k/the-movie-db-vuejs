@@ -42,8 +42,6 @@ const getMoviesOnScroll = async () => {
 };
 
 useInfiniteScroll(el, () => {
-  console.log("executei");
-
   if (movies.searchMovieQuery) {
     return;
   }

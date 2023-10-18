@@ -37,8 +37,11 @@
         </div>
         <div class="ml-2">
           <dt class="sr-only">Year</dt>
-          <dd>{{ dayjs(movie.release_date).format("YYYY") }}</dd>
+          <dd>
+            {{ dayjs(movie.release_date).format("YYYY") }}
+          </dd>
         </div>
+
         <!-- TODO: add animation heart like twitter lottie file  -->
         <div class="flex flex-col justify-center">
           <dd class="flex items-center">
@@ -58,8 +61,11 @@
               height="18"
               viewBox="0 0 24 24"
               @click="toggleFavoriteMovie(movie.id)"
-              class="cursor-pointer fill-transparent stroke-2 stroke-red-500"
-              :class="{ 'fill-red-500': isFavorite }"
+              class="cursor-pointer stroke-2 stroke-red-500"
+              :class="{
+                'fill-red-500': isFavorite,
+                'fill-transparent': !isFavorite,
+              }"
               v-if="useRoute().path === '/'"
             >
               <path
@@ -91,28 +97,19 @@
 import dayjs from "dayjs";
 import { useFavorites } from "@/store/favorites";
 import { useRoute } from "vue-router";
-import { ref } from "vue";
 
-const props = defineProps<{
+defineProps<{
   movie: any;
   isFavorite: boolean;
 }>();
 
 const favorites = useFavorites();
-const selectedFavorite = ref<boolean>(false);
 
 const toggleFavoriteMovie = (movie_id: number) => {
-  selectedFavorite.value = !selectedFavorite.value;
-
-  if (selectedFavorite.value) {
-    if (props.isFavorite) {
-      favorites.removeFavoriteMovie(movie_id);
-      selectedFavorite.value = false;
-      return;
-    }
-    favorites.addFavoriteMovie(movie_id);
-  } else {
+  if (favorites.isFavorite(movie_id)) {
     favorites.removeFavoriteMovie(movie_id);
+  } else {
+    favorites.addFavoriteMovie(movie_id);
   }
 };
 </script>

@@ -21,4 +21,3 @@ defineProps<{
   @apply bg-sky-500 text-white rounded-md;
 }
 </style>
-

@@ -19,14 +19,11 @@ const page = ref(1);
 
 onMounted(() => {
   getMoviesList();
-  console.log(movies.popularMovies);
 });
 
 const getMoviesList = async () => {
-  movies.popularMovies.splice(0);
   try {
     const { data } = await movies.getMovies();
-
     movies.popularMovies = data;
   } catch (error) {
     console.log(error);
@@ -45,6 +42,8 @@ const getMoviesOnScroll = async () => {
 };
 
 useInfiniteScroll(el, () => {
+  console.log("executei");
+
   if (movies.searchMovieQuery) {
     return;
   }

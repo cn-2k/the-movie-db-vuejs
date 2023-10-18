@@ -50,7 +50,7 @@ const favorites = useFavorites();
 const filteredPopularMovies = computed(() => {
   const filter = favorites.searchMovieQuery.toLowerCase();
   return props.movies.filter((movie: MovieInterface) =>
-    movie.title.toLowerCase().includes(filter)
+    movie.title.toLowerCase().includes(filter),
   );
 });
 </script>

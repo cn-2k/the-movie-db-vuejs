@@ -79,7 +79,11 @@
               </div>
             </div>
           </Nav>
-          <router-view />
+          <router-view v-slot="{ Component }">
+            <keep-alive exclude="MovieDetails">
+              <component :is="Component" />
+            </keep-alive>
+          </router-view>
         </div>
       </div>
       <!-- IMAGE CONTAINER  -->

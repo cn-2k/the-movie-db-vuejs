@@ -52,7 +52,7 @@
             height="18"
             viewBox="0 0 24 24"
             class="cursor-pointer text-red-500"
-            @click="removeSelectedMovie(currentMovieDetail.id)"
+            @click="favorites.removeFavoriteMovie(currentMovieDetail.id)"
             v-if="favorites.isFavorite(currentMovieDetail.id)"
           >
             <path
@@ -101,27 +101,13 @@ const getMovieDetail = async () => {
 };
 
 const favorites = useFavorites();
-const selectedFavorite = ref<boolean>(false);
 
 const toggleFavoriteMovie = (movie_id: number) => {
-  selectedFavorite.value = !selectedFavorite.value;
-  if (selectedFavorite.value) {
-    if (favorites.isFavorite(movie_id)) {
-      favorites.removeFavoriteMovie(movie_id);
-      selectedFavorite.value = false;
-      return;
-    }
-    favorites.addFavoriteMovie(movie_id);
-    selectedFavorite.value = true;
-  } else {
+  if (favorites.isFavorite(movie_id)) {
     favorites.removeFavoriteMovie(movie_id);
-    selectedFavorite.value = false;
+  } else {
+    favorites.addFavoriteMovie(movie_id);
   }
-};
-
-const removeSelectedMovie = (movie_id: number) => {
-  favorites.removeFavoriteMovie(movie_id);
-  selectedFavorite.value = false;
 };
 
 const lastNavigatedRoute = computed(() => {

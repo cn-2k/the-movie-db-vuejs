@@ -1,7 +1,6 @@
 <template>
   <main
-    class="overflow-auto scrollbar-thin scrollbar-thumb-sky-500 hover:scrollbar-thumb-sky-600 scrollbar-track-transparent h-full"
-    :class="{ 'h-[calc(100%_-_68px)]': $route.name !== 'movieDetail' }"
+    class="overflow-auto scrollbar-thin scrollbar-thumb-sky-500 hover:scrollbar-thumb-sky-600 scrollbar-track-transparent h-[calc(100%_-_68px)]"
   >
     <Movies :movies="favoriteMovies" />
     <div v-if="!favoriteMovies.length" class="mx-10 mt-4">
